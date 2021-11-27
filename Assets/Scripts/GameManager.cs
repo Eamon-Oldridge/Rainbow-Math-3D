@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     public OperationButton multiplicationButtonScript;
     public GameObject levelManagerObject;
     private LevelManager levelManager;
-    [SerializeField] private int curLevel = 1; // set to initial level
+    //[SerializeField] private int curLevel = 1; // set to initial level
     private List<OperationButton> allOperationButtons = new List<OperationButton>();
 
     // this one's bitmask calculations were working but i might as well manually set it
@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
         levelManager.setAdditionButton(additionButtonScript.gameObject);
         levelManager.setMultiplicationButton(multiplicationButtonScript.gameObject);
         levelManager.LoadLevel(0);
-        levelManager.LoadLevel(curLevel);
+        levelManager.LoadLevel(StaticDataTracker.curLevel);
         isMouseDragging = false;
         foreach (OperationButton button in allOperationButtons)
         {
@@ -167,7 +167,7 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.DownArrow)) // reload current level
         {
-            levelManager.LoadLevel(curLevel);
+            levelManager.LoadLevel(StaticDataTracker.curLevel);
             isMouseDragging = false;
             foreach (OperationButton button in allOperationButtons)
             {
@@ -176,11 +176,11 @@ public class GameManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.RightArrow)) // next level
         {
-            curLevel++;
-            if (!levelManager.LoadLevel(curLevel))
+            StaticDataTracker.curLevel++;
+            if (!levelManager.LoadLevel(StaticDataTracker.curLevel))
             {
-                curLevel--;
-                levelManager.LoadLevel(curLevel);
+                StaticDataTracker.curLevel--;
+                levelManager.LoadLevel(StaticDataTracker.curLevel);
             }
             isMouseDragging = false;
             foreach (OperationButton button in allOperationButtons)
@@ -190,11 +190,11 @@ public class GameManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow)) // prev level
         {
-            curLevel--;
-            if (!levelManager.LoadLevel(curLevel))
+            StaticDataTracker.curLevel--;
+            if (!levelManager.LoadLevel(StaticDataTracker.curLevel))
             {
-                curLevel++;
-                levelManager.LoadLevel(curLevel);
+                StaticDataTracker.curLevel++;
+                levelManager.LoadLevel(StaticDataTracker.curLevel);
             }
             isMouseDragging = false;
             foreach (OperationButton button in allOperationButtons)
