@@ -129,6 +129,7 @@ public class LevelManager : MonoBehaviour
             Debug.Log("curY: " + curY);
             */
             newBlock.transform.position = origin + offset;
+            newBlock.GetComponent<Cube>().UpdateFeatures();
         }
     }
 

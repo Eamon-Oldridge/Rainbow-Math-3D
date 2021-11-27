@@ -32,11 +32,13 @@ public class Goal : VisualNumber
         {
             modelNegative.SetActive(false);
             modelPositive.SetActive(true);
+            activeModel = modelPositive;
         }
         else
         {
             modelPositive.SetActive(false);
             modelNegative.SetActive(true);
+            activeModel = modelNegative;
         }
     }
 
@@ -47,7 +49,6 @@ public class Goal : VisualNumber
         modelPositive.SetActive(false);
         UpdateShape();
         UpdateScale();
-        SetRendModel();
         body = this.gameObject.GetComponent<Rigidbody>();
         SetMyColor(myValue); // calls SetColor() in activeModel's script
         body.isKinematic = false;
