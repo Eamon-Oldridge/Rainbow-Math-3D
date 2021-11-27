@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     public OperationButton multiplicationButtonScript;
     public GameObject levelManagerObject;
     private LevelManager levelManager;
-    private int curLevel = 0; // set to initial level
+    [SerializeField] private int curLevel = 0; // set to initial level
     private List<OperationButton> allOperationButtons = new List<OperationButton>();
 
     // this one's bitmask calculations were working but i might as well manually set it
@@ -60,9 +60,16 @@ public class GameManager : MonoBehaviour
             Debug.Log("levelManager assigned");
         }
         */
-
+        levelManager.setAdditionButton(additionButtonScript.gameObject);
+        levelManager.setMultiplicationButton(multiplicationButtonScript.gameObject);
+        levelManager.LoadLevel(0);
         levelManager.LoadLevel(curLevel);
-        
+        isMouseDragging = false;
+        foreach (OperationButton button in allOperationButtons)
+        {
+            button.UpdateDisplay();
+        }
+
     }
 
     // returns the Cube GameObject hit by a raycast from the camera, null if miss

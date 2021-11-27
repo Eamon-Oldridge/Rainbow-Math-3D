@@ -13,14 +13,14 @@ public class LevelManager : MonoBehaviour
     private float horizontalBuffer = 1f; // ?
     int PFLength = 20; // the length of the playfield
     private List<GameObject> activePieces = new List<GameObject>();
-    private GameObject goal;
+    [SerializeField] private GameObject goal;
     private GameObject additionButton;
     private GameObject multiplicationButton;
 
     // Start is called before the first frame update
     void Start()
     {
-        goal = GameObject.Find("Goal"); // should this just be assigned?
+        goal = GameObject.Find("Goal"); //also assigned using serialized field in editor. Otherwise first level load this is null.
         /*if (goal != null)
         {
             Debug.Log("Goal found");
@@ -31,6 +31,16 @@ public class LevelManager : MonoBehaviour
         }*/
         additionButton = GameObject.Find("Addition");
         multiplicationButton = GameObject.Find("Multiplication");
+    }
+
+    public void setMultiplicationButton(GameObject button)
+    {
+        this.multiplicationButton = button;
+    }
+
+    public void setAdditionButton(GameObject button)
+    {
+        this.additionButton = button;
     }
 
     private List<T> CreateList<T>(params T[] values)
