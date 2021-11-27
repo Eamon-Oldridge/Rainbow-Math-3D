@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 54d21f6ece3b46479f0c328f8c6007e0, type: 3}
-  m_Name: New TMP Color Gradient
+  m_Name: Gold_TMP_Gradient
   m_EditorClassIdentifier: 
   colorMode: 3
-  topLeft: {r: 1, g: 1, b: 1, a: 1}
-  topRight: {r: 1, g: 1, b: 1, a: 1}
-  bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-  bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  topLeft: {r: 0.9339623, g: 0.8012305, b: 0.16300285, a: 1}
+  topRight: {r: 0.93333334, g: 0.8, b: 0.16470589, a: 1}
+  bottomLeft: {r: 0.9056604, g: 0.5911943, b: 0.19223925, a: 1}
+  bottomRight: {r: 0.90588236, g: 0.5921569, b: 0.19215687, a: 1}
