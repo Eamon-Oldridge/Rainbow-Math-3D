@@ -5,19 +5,19 @@ using UnityEngine.UI;
 
 public class OperationButton : MonoBehaviour
 {
-    public string name;
+    public string myName;
     public int count = 0;
     // Start is called before the first frame update
     void Start()
     {
-        name = this.gameObject.name;
+        myName = this.gameObject.name;
         //Debug.Log("Button name is " + name);
         UpdateDisplay();
     }
 
     public void UpdateDisplay()
     {
-        this.gameObject.GetComponentInChildren<Text>().text = name + ": " + count;
+        this.gameObject.GetComponentInChildren<Text>().text = myName + ": " + count;
     }
 
 }

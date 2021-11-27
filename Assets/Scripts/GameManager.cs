@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public OperationButton additionButtonScript;
     public OperationButton multiplicationButtonScript;
     public GameObject levelManagerObject;
+    public GameObject levelDisplayText;
     private LevelManager levelManager;
     //[SerializeField] private int curLevel = 1; // set to initial level
     private List<OperationButton> allOperationButtons = new List<OperationButton>();
@@ -69,6 +70,7 @@ public class GameManager : MonoBehaviour
         {
             button.UpdateDisplay();
         }
+        levelDisplayText.GetComponent<LevelTextDisplay>().UpdateDisplay();
 
     }
 
@@ -89,7 +91,7 @@ public class GameManager : MonoBehaviour
     public void OnOperationButtonPress(OperationButton operation)
     {
         this.curOperator = operation;
-        //Debug.Log("The operation is now: " + curOperator.name);
+        //Debug.Log("The operation is now: " + curOperator.myName);
     }
 
     // Update is called once per frame
@@ -127,7 +129,7 @@ public class GameManager : MonoBehaviour
                     // if its a cube, combine check (CombineCheck will combine them if appropriate
                     if (target.GetComponent<Cube>().CombineCheck())
                     {
-                        //Debug.Log("Start Combining... curOperator is " + curOperator.name);
+                        //Debug.Log("Start Combining... curOperator is " + curOperator.myName);
                         if (curOperator.count > 0)
                         {
                             curOperator.count--;
@@ -187,6 +189,7 @@ public class GameManager : MonoBehaviour
             {
                 button.UpdateDisplay();
             }
+            levelDisplayText.GetComponent<LevelTextDisplay>().UpdateDisplay();
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow)) // prev level
         {
@@ -201,6 +204,7 @@ public class GameManager : MonoBehaviour
             {
                 button.UpdateDisplay();
             }
+            levelDisplayText.GetComponent<LevelTextDisplay>().UpdateDisplay();
         }
     } // end update
 }
