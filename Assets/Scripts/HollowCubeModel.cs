@@ -20,7 +20,7 @@ public class HollowCubeModel : VNModel
             //childCount++;
             if (child.tag == "MeshMember")
             {
-                child.GetComponent<Renderer>().material.color = Color.red;
+                child.GetComponent<Renderer>().material.color = color;
             }
         }
     }

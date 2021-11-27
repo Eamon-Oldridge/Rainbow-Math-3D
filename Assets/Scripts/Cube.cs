@@ -264,11 +264,13 @@ public class Cube : VisualNumber
         {
             modelNegative.SetActive(false);
             modelPositive.SetActive(true);
+            activeModel = modelPositive;
         }
         else
         {
             modelPositive.SetActive(false);
             modelNegative.SetActive(true);
+            activeModel = modelNegative;
         }
     }
     // Start is called before the first frame update

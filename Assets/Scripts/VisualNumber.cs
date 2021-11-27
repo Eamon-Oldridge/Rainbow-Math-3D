@@ -96,13 +96,16 @@ public abstract class VisualNumber : MonoBehaviour
     public void SetMyColor(Color color)
     {
         SetRendModel(); // updates activeModel
-        activeModel.GetComponent<VNModel>().SetColor(color);
+        activeModel.GetComponent<VNModel>().SetColor(color); 
     }
     // sets this block's color when given an integer value
     public void SetMyColor(int value)
     {
         SetRendModel();
-        activeModel.GetComponent<VNModel>().SetColor(value);
+        if(activeModel.GetComponent<VNModel>() != null)
+        {
+            activeModel.GetComponent<VNModel>().SetColor(value); // possible future improvement is to generalize this in VN, and allow different shapes to set their colors more dynamically
+        }
         /*
         foreach (Transform child in activeRend.gameObject.transform)
         {

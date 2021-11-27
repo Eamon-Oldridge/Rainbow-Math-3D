@@ -6,11 +6,11 @@ public class LevelManager : MonoBehaviour
 {
     public GameObject gamePiece; // assigned in inspector
 
-    private float columnSpacing = 1.75f;
-    private float rowSpacing = 1.25f;
-    private float goalSpacing = 1f;
-    private float verticalBuffer = 6f;
-    private float horizontalBuffer = 1f;
+    private float columnSpacing = 1.75f; // the spacing for spawning the blocks with the level factory
+    private float rowSpacing = 1.25f; // ^^
+    private float goalSpacing = 1f; // how far away from the side the goal is
+    private float verticalBuffer = 6f; // ?
+    private float horizontalBuffer = 1f; // ?
     int PFLength = 20; // the length of the playfield
     private List<GameObject> activePieces = new List<GameObject>();
     private GameObject goal;
@@ -20,7 +20,7 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        goal = GameObject.Find("Goal");
+        goal = GameObject.Find("Goal"); // should this just be assigned?
         /*if (goal != null)
         {
             Debug.Log("Goal found");
