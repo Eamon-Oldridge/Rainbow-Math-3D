@@ -27,7 +27,8 @@ public class GameManager : MonoBehaviour
 
     // this one's bitmask calculations were working but i might as well manually set it
     int defaultMask = 1;
-    // I'M PISSED i have no idea why manually setting it here is necessary i tried copying the exact code that i had working in LayerDebug here and it was totally messed up.
+    // I'M PISSED i have no idea why manually setting it here is necessary i tried
+    // copying the exact code that i had working in LayerDebug here and it was totally messed up.
     int PFMask = 256;
 
     // Start is called before the first frame update
