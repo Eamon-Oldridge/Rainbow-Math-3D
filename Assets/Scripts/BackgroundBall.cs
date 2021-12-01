@@ -7,8 +7,8 @@ public class BackgroundBall : MonoBehaviour
     [SerializeField] private float xyBoundaries = 50;
     [SerializeField] private float zBoundary = 50;
     [SerializeField] private float camBoundary = 10;
-    [SerializeField] private int maxVel = 10;
-    [SerializeField] private int minVel = 3;
+    [SerializeField] private float maxVel = 10;
+    [SerializeField] private float minVel = 3;
 
     private float[] vels = { 3, 3, 3 };
     Color myColor;
@@ -35,14 +35,21 @@ public class BackgroundBall : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (this.gameObject.transform.position.x < (0 - xyBoundaries) || this.gameObject.transform.position.x > xyBoundaries) { vels[0] = vels[0] * -Random.Range(0.5f, 1.5f); dVFlag = true; }
-        if (this.gameObject.transform.position.y < (0 - xyBoundaries) || this.gameObject.transform.position.y > xyBoundaries) { vels[1] = vels[1] * -Random.Range(0.5f, 1.5f); dVFlag = true; }
-        if (this.gameObject.transform.position.z < (camBoundary) || this.gameObject.transform.position.z > zBoundary) { vels[2] = vels[2] * -Random.Range(0.5f, 1.5f); dVFlag = true; }
+        if (this.gameObject.transform.position.x < (0 - xyBoundaries) || this.gameObject.transform.position.x > xyBoundaries) { vels[0] = vels[0] * -Random.Range(0.5f, 2f); dVFlag = true; }
+        if (this.gameObject.transform.position.y < (0 - xyBoundaries) || this.gameObject.transform.position.y > xyBoundaries) { vels[1] = vels[1] * -Random.Range(0.5f, 2f); dVFlag = true; }
+        if (this.gameObject.transform.position.z < (camBoundary) || this.gameObject.transform.position.z > zBoundary) { vels[2] = vels[2] * -Random.Range(0.5f, 2f); dVFlag = true; }
+        for (int i = 0; i < 3; i++) {
+            //Debug.Log("preclamp: " + vels[i]);
+            if (vels[i] < 0) { vels[i] = Mathf.Clamp(vels[i], -maxVel, -minVel); }
+            else { vels[i] = Mathf.Clamp(vels[i], minVel, maxVel); }
+            //Debug.Log("clamped: " + vels[i]);
+        }
+        
         if (dVFlag) {
             dVFlag = false;
             rb.velocity = new Vector3(vels[0], vels[1], vels[2]);
         }
-        myColor = new Color((1 / (xyBoundaries * 2)) * (this.gameObject.transform.position.x + xyBoundaries), (1/(xyBoundaries * 2)) * (this.gameObject.transform.position.y + xyBoundaries), (1 / (zBoundary - camBoundary)) * (this.gameObject.transform.position.z - camBoundary));
+        myColor = new Color(1 - (1 / (xyBoundaries * 2)) * (this.gameObject.transform.position.x + xyBoundaries), (1/(xyBoundaries * 2)) * (this.gameObject.transform.position.y + xyBoundaries), (1 / (zBoundary - camBoundary)) * (this.gameObject.transform.position.z - camBoundary));
         rend.material.color = myColor;
         //Debug.Log("color changed to " + myColor.ToString());
     }
