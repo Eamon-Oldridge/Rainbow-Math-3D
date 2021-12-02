@@ -51,6 +51,7 @@ public class BackgroundBall : MonoBehaviour
         }
         myColor = new Color(1 - (1 / (xyBoundaries * 2)) * (this.gameObject.transform.position.x + xyBoundaries), (1/(xyBoundaries * 2)) * (this.gameObject.transform.position.y + xyBoundaries), (1 / (zBoundary - camBoundary)) * (this.gameObject.transform.position.z - camBoundary));
         rend.material.color = myColor;
+        rend.material.SetColor("_EmissionColor", myColor);
         //Debug.Log("color changed to " + myColor.ToString());
     }
 }
