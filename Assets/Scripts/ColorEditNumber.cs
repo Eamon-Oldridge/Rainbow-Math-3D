@@ -8,6 +8,8 @@ public class ColorEditNumber : MonoBehaviour
     public FlexibleColorPicker fcp;
     public TMPro.TextMeshProUGUI myTMP;
     public int myVal = 1;
+    Button myButton;
+    ColorEditLegend legend;
 
     // Start is called before the first frame update
     void Start()
@@ -15,24 +17,51 @@ public class ColorEditNumber : MonoBehaviour
         myTMP = gameObject.GetComponentInChildren<TMPro.TextMeshProUGUI>();
         fcp = FindObjectOfType<FlexibleColorPicker>();
         myTMP.text = myVal.ToString();
-        SetMyColor(PPValueToColor(myVal));
+        myTMP.color = PlayerPrefsValueToColor(myVal);
+        myButton = gameObject.GetComponent<Button>();
+        legend = gameObject.GetComponentInParent<ColorEditLegend>();
+        myButton.onClick.AddListener(() => { legend.SetActiveNumber(this); });
     }
 
-    public void SetMyColor(Color color)
+
+
+    public void SetFCPColor()
     {
-        myTMP.material.color = color;
+        fcp.color = myTMP.color;
     }
 
-    Color PPValueToColor(int val)
+    public void SetColorFromFCP()
+    {
+        Color c = fcp.color;
+        myTMP.color = c;
+        int[] rgb = { Mathf.FloorToInt(c.r*255f),
+                      Mathf.FloorToInt(c.g*255f),
+                      Mathf.FloorToInt(c.b*255f) };
+        string keyString = "";
+
+        for (int i = 0; i < 3; i++)
+        {
+            keyString = myVal.ToString() + i.ToString();
+            PlayerPrefs.SetInt(keyString, rgb[i]);
+            Debug.Log("Setting PP key " + keyString + " to: " + rgb[i].ToString());
+        }
+    }
+
+    Color PlayerPrefsValueToColor(int val)
     {
         int[] rgb = { 0, 0, 0 };
-        string colString = "";
+        string keyString = "";
 
         for (int i = 0; i < 3; i++){
-            colString = myVal.ToString() + i.ToString();
-            if (!PlayerPrefs.HasKey(colString)) { return myTMP.material.color; }
-            rgb[i] = PlayerPrefs.GetInt(colString);
+            keyString = myVal.ToString() + i.ToString();
+            if (!PlayerPrefs.HasKey(keyString)) {
+                Debug.Log("Number " + myVal + " doens't have a PP Color saved");
+                return myTMP.color;
+            }
+            rgb[i] = PlayerPrefs.GetInt(keyString);
+            Debug.Log("Pulling PP pair " + keyString + " : " + rgb[i].ToString() + " to rgb: " + i.ToString());
         }
-        return new Color(rgb[0], rgb[1], rgb[2]);
+        Debug.Log("Final rgb array: " + rgb);
+        return new Color(rgb[0] / 255f, rgb[1] / 255f, rgb[2] / 255f);
     }
 }
