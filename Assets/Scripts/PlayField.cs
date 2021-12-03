@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Plane : MonoBehaviour
+public class PlayField : MonoBehaviour
 {
     // ##### VVV   Color change variables   VVV #####
     private static Color darkBlue = new Vector4(.05f, .231f, .588f, 1);
