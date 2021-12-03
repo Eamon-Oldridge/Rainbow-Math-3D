@@ -20,7 +20,10 @@ public class ColorEditNumber : MonoBehaviour
         myTMP.color = PlayerPrefsValueToColor(myVal);
         myButton = gameObject.GetComponent<Button>();
         legend = gameObject.GetComponentInParent<ColorEditLegend>();
-        myButton.onClick.AddListener(() => { legend.SetActiveNumber(this); });
+        myButton.onClick.AddListener(() => {
+            legend.SetActiveNumber(this);
+            SetFCPColor();
+        });
     }
 
 
@@ -32,7 +35,11 @@ public class ColorEditNumber : MonoBehaviour
 
     public void SetColorFromFCP()
     {
-        Color c = fcp.color;
+        SaveColor(fcp.color);
+    }
+
+    public void SaveColor(Color c)
+    {
         myTMP.color = c;
         int[] rgb = { Mathf.FloorToInt(c.r*255f),
                       Mathf.FloorToInt(c.g*255f),
@@ -56,12 +63,12 @@ public class ColorEditNumber : MonoBehaviour
             keyString = myVal.ToString() + i.ToString();
             if (!PlayerPrefs.HasKey(keyString)) {
                 Debug.Log("Number " + myVal + " doens't have a PP Color saved");
-                return myTMP.color;
+                //return myTMP.color;
+                return StaticDataTracker.GetDefaultColor(myVal);
             }
             rgb[i] = PlayerPrefs.GetInt(keyString);
             Debug.Log("Pulling PP pair " + keyString + " : " + rgb[i].ToString() + " to rgb: " + i.ToString());
         }
-        Debug.Log("Final rgb array: " + rgb);
         return new Color(rgb[0] / 255f, rgb[1] / 255f, rgb[2] / 255f);
     }
 }
