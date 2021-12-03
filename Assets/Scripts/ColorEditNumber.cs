@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class ColorEditNumber : MonoBehaviour
 {
-    public Material myMat;
     public FlexibleColorPicker fcp;
     public TMPro.TextMeshProUGUI myTMP;
     public int myVal = 1;
@@ -13,9 +12,8 @@ public class ColorEditNumber : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        myMat = this.gameObject.GetComponent<Material>();
+        myTMP = gameObject.GetComponentInChildren<TMPro.TextMeshProUGUI>();
         fcp = FindObjectOfType<FlexibleColorPicker>();
-        myTMP = gameObject.GetComponent<TMPro.TextMeshProUGUI>();
         myTMP.text = myVal.ToString();
         SetMyColor(PPValueToColor(myVal));
     }
@@ -32,6 +30,7 @@ public class ColorEditNumber : MonoBehaviour
 
         for (int i = 0; i < 3; i++){
             colString = myVal.ToString() + i.ToString();
+            if (!PlayerPrefs.HasKey(colString)) { return myTMP.material.color; }
             rgb[i] = PlayerPrefs.GetInt(colString);
         }
         return new Color(rgb[0], rgb[1], rgb[2]);
