@@ -26,8 +26,6 @@ public class ColorEditNumber : MonoBehaviour
         });
     }
 
-
-
     public void SetFCPColor()
     {
         fcp.color = myTMP.color;
@@ -38,9 +36,15 @@ public class ColorEditNumber : MonoBehaviour
         SaveColor(fcp.color);
     }
 
+    public void SetColor(Color c) {
+        myTMP = gameObject.GetComponentInChildren<TMPro.TextMeshProUGUI>();
+        myTMP.color = c;
+    }
+    public void SetColor() { SetColor(PlayerPrefsValueToColor(myVal)); }
+
     public void SaveColor(Color c)
     {
-        myTMP.color = c;
+        SetColor(c);
         int[] rgb = { Mathf.FloorToInt(c.r*255f),
                       Mathf.FloorToInt(c.g*255f),
                       Mathf.FloorToInt(c.b*255f) };
@@ -50,7 +54,7 @@ public class ColorEditNumber : MonoBehaviour
         {
             keyString = myVal.ToString() + i.ToString();
             PlayerPrefs.SetInt(keyString, rgb[i]);
-            Debug.Log("Setting PP key " + keyString + " to: " + rgb[i].ToString());
+            //Debug.Log("Setting PP key " + keyString + " to: " + rgb[i].ToString());
         }
     }
 
@@ -62,12 +66,11 @@ public class ColorEditNumber : MonoBehaviour
         for (int i = 0; i < 3; i++){
             keyString = myVal.ToString() + i.ToString();
             if (!PlayerPrefs.HasKey(keyString)) {
-                Debug.Log("Number " + myVal + " doens't have a PP Color saved");
-                //return myTMP.color;
+                //Debug.Log("Number " + myVal + " doens't have a PP Color saved");
                 return StaticDataTracker.GetDefaultColor(myVal);
             }
             rgb[i] = PlayerPrefs.GetInt(keyString);
-            Debug.Log("Pulling PP pair " + keyString + " : " + rgb[i].ToString() + " to rgb: " + i.ToString());
+            //Debug.Log("Pulling PP pair " + keyString + " : " + rgb[i].ToString() + " to rgb: " + i.ToString());
         }
         return new Color(rgb[0] / 255f, rgb[1] / 255f, rgb[2] / 255f);
     }
