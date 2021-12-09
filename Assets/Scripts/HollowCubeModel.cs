@@ -4,20 +4,17 @@ using UnityEngine;
 
 public class HollowCubeModel : VNModel
 {
-    void Start()
+    void Awake()
     {
         rend = this.gameObject.GetComponent<Renderer>();
     }
 
-    public override void SetColor(Color color)
+    public override void SetMyColor(Color color)
     {
-        this.gameObject.GetComponent<Renderer>().material.color = color;
+        rend.material.color = color;
         // int childCount = 0;
         foreach (Transform child in transform) // this is the thing that worked.
         {
-            //Debug.Log("Child# " + childCount);
-            //Debug.Log(transform.gameObject);
-            //childCount++;
             if (child.tag == "MeshMember")
             {
                 child.GetComponent<Renderer>().material.color = color;

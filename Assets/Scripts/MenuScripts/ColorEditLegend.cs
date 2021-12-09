@@ -28,7 +28,7 @@ public class ColorEditLegend : MonoBehaviour
     {
         foreach (ColorEditNumber n in GetComponentsInChildren<ColorEditNumber>())
         {
-            n.SetColor();
+            n.SetMyColor();
         }
     }
 
@@ -48,7 +48,7 @@ public class ColorEditLegend : MonoBehaviour
         }
         foreach (ColorEditNumber n in nums)
         {
-            n.myTMP.color = StaticDataTracker.GetDefaultColor(n.myVal % 10);
+            n.myTMP.color = n.GetDefaultColor(n.myVal % 10);
         }
     }
 

@@ -5,13 +5,13 @@ using UnityEngine;
 public class FullCubeModel : VNModel
 {
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         rend = this.gameObject.GetComponent<Renderer>();
     }
 
-    public override void SetColor(Color color)
+    public override void SetMyColor(Color color)
     {
-        this.gameObject.GetComponent<Renderer>().material.color = color;
+        rend.material.color = color;
     }
 }

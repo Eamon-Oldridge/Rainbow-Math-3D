@@ -4,45 +4,12 @@ using UnityEngine;
 
 public class Cube : VisualNumber
 {
-    //public int myValue = 1;
 
     public GameObject modelPositive;
     public GameObject modelNegative;
 
-    /*
-    // 1 :: Red
-    private Color myRed = new Vector4(1f, .1f, .1f, 1f);
-    // 2 :: Orange //(.996f, .263f, .212f, 1f);
-    private Color myOrange = new Vector4(.996f, .4f, .15f, 1f);
-    // 3 :: Yellow (1f, .922f, .231f, 1f);
-    private Color myYellow = new Vector4(1f, .922f, .2f, 1f);
-    // 4 :: Green
-    private Color myGreen = new Vector4(.315f, .69f, .315f, 1f);
-    // 5 :: Strong-Green
-    private Color myStrongGreen = new Vector4(.05f, .432f, .032f, 1f);
-    // 6 :: Cyan
-    private Color myCyan = new Vector4(0, .737f, .831f, 1f);
-    // 7 :: Blue
-    private Color myBlue = new Vector4(.012f, .4f, 1f, 1f);
-    // 8 :: Magenta
-    private Color myMagenta = new Vector4(.612f, .153f, .69f, 1f);
-    // 9 :: Pink
-    private Color myPink = new Vector4(.914f, .118f, .388f, 1f);
-    // 10 :: Bright-Pink
-    private Color myBrightPink = new Vector4(.975f, .45f, .55f, 1f);
-    // 12 :: Indigo
-    private Color myIndigo = new Vector4(.247f, .318f, .71f, 1f);
-    // 11 :: soft-blue
-    private Color mySoftBlue = new Vector4(.012f, .663f, 1f, 1f);
-    // 14 :: Soft-Black
-    private Color myBlack = new Vector4(.07f, .02f, .02f, 1f);
-    // 13 :: Rose-White
-    private Color myWhite = new Vector4(.9f, .8f, .8f, 1f);
-    // -- :: Soft-Orange
-    private Color mySoftOrange = new Vector4(1f, .596f, 0, 1f);
-    */
-    //Renderer rend;
     Rigidbody body;
+
     private List<GameObject> intersectingCubeList = new List<GameObject>();
     public int intersectCount = 0;
     private float previewingCombine = 0.5f; // 0.5 used as "null", otherwise it's always an int
@@ -108,62 +75,7 @@ public class Cube : VisualNumber
         intersectingCubeList.Add(other);
         intersectCount = intersectingCubeList.Count;
     }
-    /*
-    private Color GetColor(int value)
-    {
-        switch (value % 10)
-        {
-            case 0:
-                return myBrightPink;
-                //break;
-            case 1:
-                return myRed;
-                //break;
-            case 2:
-                return myOrange;
-                //break;
-            case 3:
-                return myYellow;
-                //break;
-            case 4:
-                return myGreen;
-                //break;
-            case 5:
-                return myStrongGreen;
-                //break;
-            case 6:
-                return myCyan;
-                //break;
-            case 7:
-                return myBlue;
-                //break;
-            case 8:
-                return myMagenta;
-                //break;
-            case 9:
-                return myPink;
-                //break;
-
-            default:
-                return Color.gray;
-                //break;
-        }
-    }
-    */
-    /*
-    // sets this block's color when given a color
-    public void SetMyColor(Color color)
-    {
-        rend.material.color = color;
-    }
-    */
-    /*
-    // sets this block's color when given an integer value
-    public void SetMyColor(int value)
-    {
-        rend.material.color = GetColor(value);
-    }
-    */
+    
     //given a mathable object we're colliding with, find what operation should be performed if combined
     private string FindOperator()
     {
@@ -279,13 +191,13 @@ public class Cube : VisualNumber
         modelPositive = this.gameObject.transform.GetChild(0).gameObject;
         modelNegative = this.gameObject.transform.GetChild(1).gameObject;
         SetRendModel();
-        //rend = this.GetComponent<Renderer>();
+
         body = this.gameObject.GetComponent<Rigidbody>();
-        // make it start sitting on the ground
         modelNegative.SetActive(false);
         modelPositive.SetActive(false);
         UpdateShape();
         UpdateScale();
+        // make it start sitting on the ground
         this.transform.position = new Vector3(this.transform.position.x, Mathf.Pow(Mathf.Abs(myValue), 0.33f) / 2, this.transform.position.z);
         SetMyColor(myValue); // calls SetColor() in activeModel's script
         body.mass = myValue;
@@ -307,7 +219,7 @@ public class Cube : VisualNumber
             float curTime = Time.time % previewPeriod;
             float lerp = curTime;
             int previewValue = (int) previewingCombine;
-            SetMyColor(Color.Lerp(GetColor(myValue), GetColor(previewValue), lerp));
+            SetMyColor(Color.Lerp(PlayerPrefsValueToColor(myValue), PlayerPrefsValueToColor(previewValue), lerp));
             //other.GetComponent<Cube>().SetMyColor(Color.Lerp(GetColor(other.GetComponent<Cube>().myValue), GetColor(sumValue), lerp));
         }
         // update size based off value (area == value)

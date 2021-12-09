@@ -28,45 +28,4 @@ public static class StaticDataTracker
     // 0 :: Pink
     public static Color myPink = new Vector4(.901f, .117f, .894f, 1f);
 
-    public static Color GetDefaultColor(int index)
-    {
-        switch (index)
-        {
-            case 0:
-                return myPink;
-            //break;
-            case 1:
-                return myRed;
-            //break;
-            case 2:
-                return myOrange;
-            //break;
-            case 3:
-                return myYellow;
-            //break;
-            case 4:
-                return myGreen;
-            //break;
-            case 5:
-                return myStrongGreen;
-            //break;
-            case 6:
-                return myCyan;
-            //break;
-            case 7:
-                return myBlue;
-            //break;
-            case 8:
-                return myIndigo;
-            //break;
-            case 9:
-                return myPurple;
-            //break;
-
-            default:
-                return Color.gray;
-                //break;
-        }
-    }
-
 }

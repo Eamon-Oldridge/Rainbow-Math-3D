@@ -53,10 +53,4 @@ public class Goal : VisualNumber
         SetMyColor(myValue); // calls SetColor() in activeModel's script
         body.isKinematic = false;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
