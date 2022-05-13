@@ -19,7 +19,7 @@ public abstract class VisualNumber : Colorable
         return PlayerPrefsValueToColor(myValue);
     }
 
-    // sets this block's color when given a color .. depricated?
+    // sets this block's color when given a color .. depricated? -- used by goal!
     public override void SetMyColor(Color c)
     {
         SetRendModel(); // updates activeModel
